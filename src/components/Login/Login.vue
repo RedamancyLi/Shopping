@@ -1,16 +1,21 @@
 <template>
-<el-form :model="loginForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" label-position="top">
+
+<el-row type="flex" justify="center" class="login" align="middle">
+  <el-col  :xs="14" :sm="12" :md="10" :lg="6" :xl="6">
+    <el-form :model="loginForm" :rules="rules" ref="ruleForm" label-width="100px" class="login-form" label-position="top">
   <el-form-item label="用户名" prop="username">
     <el-input v-model="loginForm.username"></el-input>
   </el-form-item>
   <el-form-item label="密码" prop="password">
-    <el-input v-model="loginForm.password"></el-input>
+    <el-input v-model="loginForm.password" type="password"></el-input>
   </el-form-item>
-  <el-form-item>
+  <el-form-item class="btn">
     <el-button type="primary" @click="submitForm('ruleForm')">登陆</el-button>
     <el-button @click="resetForm('ruleForm')">重置</el-button>
   </el-form-item>
-</el-form>
+</el-form></el-col>
+</el-row>
+
 </template>
 
 
@@ -39,6 +44,7 @@ export default {
   methods: {
     //登陆
     submitForm(formName) {
+      console.log(this.$route , this.$router)
       this.$refs[formName].validate(valid => {
         //valid 表示表单是否校验成功
         if (!valid) {
@@ -51,7 +57,7 @@ export default {
           .then(res => {
             if (res.data.meta.status === 200) {
               //将登陆标识token存储到localStorage中
-              localStorage.setItem('token',res.data.data.token)
+              localStorage.setItem("token", res.data.data.token);
               //登陆成功  跳转到首页
               this.$router.push("/home");
               this.$message({
@@ -78,4 +84,18 @@ export default {
 </script>
 
 <style>
+.login{
+  height: 100%;
+  background-color: #2D434C;
+}
+.login-form 
+{
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 15px;
+}
+.btn 
+{
+  text-align: center;
+}
 </style>

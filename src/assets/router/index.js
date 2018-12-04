@@ -17,7 +17,7 @@ const router = new VueRouter({
     { path: '/home', component: Home }
   ]
 })
-
+// router.push('/login')
 //添加导航守卫来实现登陆的访问限制
 router.beforeEach((to, from, next) => {
   // ...

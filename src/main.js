@@ -10,6 +10,9 @@ import ElementUI from 'element-ui'
 //导入ElementUI 样式文件
 import 'element-ui/lib/theme-chalk/index.css'
 
+//导入自定义样式
+import '@/assets/css/index.css'
+
 //作为插件引入
 Vue.use(ElementUI)
 Vue.config.productionTip = false
