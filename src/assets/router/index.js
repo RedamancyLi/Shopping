@@ -18,6 +18,22 @@ const router = new VueRouter({
   ]
 })
 
+//添加导航守卫来实现登陆的访问限制
+router.beforeEach((to, from, next) => {
+  // ...
+  if (to.path === "/login") {
+    //是登陆页面
+    return next();
+  }
+  //不是登陆页面
+  const token = localStorage.getItem('token')
+  if (token) {
+    next()
+  } else {
+    next('/login')
+  }
+})
+
 //导出路由实例
 export default router
 
