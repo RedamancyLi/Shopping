@@ -2,14 +2,9 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-// 1导入路由
-import VueRouter from 'vue-router'
-// 2将路由作为插件安装
-Vue.use(VueRouter)
-// 3创建路由 配置路由
-const router = new VueRouter({
- 
-})
+
+// 导入路由
+import router from  './assets/router'
 
 Vue.config.productionTip = false
 
@@ -17,5 +12,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  // 4.将vue实例和router实例关联
+  router
 })
