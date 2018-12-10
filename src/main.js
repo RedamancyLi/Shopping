@@ -10,7 +10,7 @@ import ElementUI from 'element-ui'
 //导入ElementUI 样式文件
 import 'element-ui/lib/theme-chalk/index.css'
 
-//导入自定义样式
+//导入自定义样式啊
 import '@/assets/css/index.css'
 
 //导入第三方组件 表格展开
