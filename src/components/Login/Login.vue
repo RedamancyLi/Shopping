@@ -43,37 +43,40 @@ export default {
   },
   methods: {
     //登陆
-    submitForm(formName) {
-      console.log(this.$route , this.$router)
-      this.$refs[formName].validate(valid => {
-        //valid 表示表单是否校验成功
-        if (!valid) {
-          return false;
-        }
+    async submitForm(formName) {
+      try {
+        await this.$refs[formName].validate();
+
         //验证成功：
         //发送axios
-        axios
-          .post("http://localhost:8888/api/private/v1/login", this.loginForm)
-          .then(res => {
-            if (res.data.meta.status === 200) {
-              //将登陆标识token存储到localStorage中
-              localStorage.setItem("token", res.data.data.token);
-              //登陆成功  跳转到首页
-              this.$router.push("/home");
-              this.$message({
-                message: res.data.meta.msg,
-                type: "success",
-                duration: 800
-              });
-            } else {
-              this.$message({
-                message: res.data.meta.msg,
-                type: "error",
-                duration: 1000
-              });
-            }
+        const res = await axios.post(
+          "http://localhost:8888/api/private/v1/login",
+          this.loginForm
+        );
+console.log(res)
+        if (res.data.meta.status === 200) {
+          //将登陆标识token存储到localStorage中
+          localStorage.setItem("token", res.data.data.token);
+          localStorage.setItem('unname',this.loginForm.username)
+          //登陆成功  跳转到首页
+          this.$router.push("/home");
+          this.$message({
+            message: res.data.meta.msg,
+            type: "success",
+            duration: 800
           });
-      });
+        } else {
+          this.$message({
+            message: res.data.meta.msg,
+            type: "error",
+            duration: 1000
+          });
+        }
+      } catch (err) {
+        //失败
+      }
+
+      // console.log(this.$route, this.$router);
     },
     //重置
     resetForm(formName) {
@@ -84,18 +87,16 @@ export default {
 </script>
 
 <style>
-.login{
+.login {
   height: 100%;
-  background-color: #2D434C;
+  background-color: #2d434c;
 }
-.login-form 
-{
+.login-form {
   background-color: #fff;
   padding: 25px;
   border-radius: 15px;
 }
-.btn 
-{
+.btn {
   text-align: center;
 }
 </style>
