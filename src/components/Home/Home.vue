@@ -20,7 +20,7 @@
  <el-menu
       :unique-opened="true"
       :router="true"
-      :default-active="$route.path.slice(1)"
+      :default-active="$route.path.split('/').length===3?('/'+$route.path.split('/')[1]):$route.path"
       class="el-menu-vertical-demo"
       background-color="#545c64"
       text-color="#fff"
@@ -31,7 +31,7 @@
           <span>{{level1.authName}}</span>
         </template>
         <!-- 内部导航 -->
-      <el-menu-item :index="level2.path" v-for="level2 in level1.children" :key="level2.id">
+      <el-menu-item :index="'/'+level2.path" v-for="level2 in level1.children" :key="level2.id">
         <i class="el-icon-menu"></i>
         <span slot="title">{{ level2.authName}}</span>
       </el-menu-item>

@@ -23,6 +23,8 @@ import Datalist from "@/components/Data/reports";
 //配置商品添加的路由
 import Addgoods from "@/components/Commodity/goods-add";
 
+//404页面
+import CannotFind from "@/components/CannotFind/CannotFind"
 // 2将路由作为插件安装
 Vue.use(VueRouter);
 
@@ -30,7 +32,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   routes: [
     //路由重定向
-    { path: "/", redirect: "/login" },
+    { path: "/", redirect: "/home" },
     { path: "/login", component: Login },
     {
       path: "/home",
@@ -53,7 +55,9 @@ const router = new VueRouter({
         { path: "/reports", component: Datalist },
         { path: "/goods-add", component: Addgoods }
       ]
-    }
+    },
+    // *表示要匹配所有的路由 所以一定要放在最后
+    { path: "*", component: CannotFind }
   ]
 });
 // router.push('/login')
